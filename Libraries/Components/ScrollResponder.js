@@ -179,6 +179,13 @@ var ScrollResponderMixin = {
    */
   scrollResponderHandleStartShouldSetResponderCapture: function(e: Event): boolean {
     // First see if we want to eat taps while the keyboard is up
+
+    // EDIT FROM NATE COLLINGS, Dec 20th, 2016
+    // https://github.com/facebook/react-native/issues/4229
+    // Would love to get rid of this, but can't find any other working solution.
+    if (this.props.fixDoubleTapIssue) return false;
+    // END EDIT
+
     var currentlyFocusedTextInput = TextInputState.currentlyFocusedField();
     if (!this.props.keyboardShouldPersistTaps &&
       currentlyFocusedTextInput != null &&
